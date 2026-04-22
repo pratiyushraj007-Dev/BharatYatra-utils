@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RailScanner — Indian Train Availability &amp; Booking</title>
+  <meta name="description" content="Check real-time Indian train seat availability, prices, departure/arrival times. Book tickets via IRCTC.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ─── Background Glow ─── -->
+  <div class="bg-glow"></div>
+
+  <!-- ─── Header ─── -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">🚂</span>
+        <div>
+          <h1>Rail<span>Scanner</span></h1>
+          <p class="subtitle">ConfirmTkt Scraper · Live Data</p>
+        </div>
+      </div>
+      <a href="https://www.confirmtkt.com" target="_blank" rel="noopener" class="source-badge">
+        <span class="dot-live"></span> Data from ConfirmTkt
+      </a>
+    </div>
+  </header>
+
+  <!-- ─── Search ─── -->
+  <main>
+    <section class="search-section" id="searchSection">
+      <div class="search-box">
+        <h2>Find Trains Between Stations</h2>
+        <p class="search-sub">Search seat availability, prices &amp; departure times for a specific date</p>
+
+        <form id="searchForm" autocomplete="off">
+          <div class="form-row">
+            <!-- From -->
+            <div class="field" id="fromField">
+              <label for="fromInput">From Station</label>
+              <input type="text" id="fromInput" placeholder="e.g. New Delhi" required>
+              <input type="hidden" id="fromCode">
+              <div class="dropdown" id="fromDrop"></div>
+            </div>
+
+            <button type="button" id="swapBtn" class="swap-btn" title="Swap">⇄</button>
+
+            <!-- To -->
+            <div class="field" id="toField">
+              <label for="toInput">To Station</label>
+              <input type="text" id="toInput" placeholder="e.g. Mumbai" required>
+              <input type="hidden" id="toCode">
+              <div class="dropdown" id="toDrop"></div>
+            </div>
+          </div>
+
+          <!-- Date Picker -->
+          <div class="date-picker-row">
+            <div class="field date-field" id="dateField">
+              <label for="dateInput">Travel Date</label>
+              <div class="date-input-wrap">
+                <span class="date-input-icon">📅</span>
+                <input type="date" id="dateInput" required>
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" id="searchBtn" class="btn-search">
+            <span>🔍</span> Search Trains
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ─── Loading ─── -->
+    <section class="loader-section hidden" id="loaderSection">
+      <div class="loader-box">
+        <div class="spinner"></div>
+        <p>Scraping ConfirmTkt for live train data…</p>
+        <p class="loader-hint">This may take 10-15 seconds (headless browser is rendering the page)</p>
+      </div>
+    </section>
+
+    <!-- ─── Error ─── -->
+    <section class="error-section hidden" id="errorSection">
+      <div class="error-box">
+        <span class="err-icon">⚠️</span>
+        <h3 id="errTitle">Error</h3>
+        <p id="errMsg">Something went wrong.</p>
+        <button onclick="resetUI()" class="btn-retry">Try Again</button>
+      </div>
+    </section>
+
+    <!-- ─── Results ─── -->
+    <section class="results-section hidden" id="resultsSection">
+      <!-- Route Banner -->
+      <div class="route-banner" id="routeBanner">
+        <div class="route-cities">
+          <span id="rFrom">—</span>
+          <span class="arrow">→</span>
+          <span id="rTo">—</span>
+        </div>
+        <div class="route-stats">
+          <span class="stat" id="rTotal"></span>
+          <span class="stat" id="rDist"></span>
+          <span class="stat" id="rDate"></span>
+        </div>
+        <a id="rLink" href="#" target="_blank" rel="noopener" class="view-src">View on ConfirmTkt ↗</a>
+      </div>
+
+      <!-- Filters -->
+      <div class="filter-bar">
+        <div class="filter-pills">
+          <button class="pill active" data-f="all">All Trains</button>
+          <button class="pill" data-f="avail">Seats Available</button>
+        </div>
+        <select id="sortSel" class="sort-sel">
+          <option value="departure">Sort: Departure ↑</option>
+          <option value="name">Sort: Name</option>
+          <option value="cheapest">Sort: Cheapest</option>
+        </select>
+      </div>
+
+      <!-- Date Display Bar -->
+      <div id="dateBar" class="date-bar"></div>
+
+      <!-- Train Cards -->
+      <div id="trainCards" class="train-cards"></div>
+      <p class="no-match hidden" id="noMatch">No trains match this filter.</p>
+
+      <!-- Nearby Station Trains -->
+      <div id="nearbySection" class="nearby-section hidden"></div>
+    </section>
+  </main>
+
+  <!-- ─── Footer ─── -->
+  <footer>
+    <p>Data scraped from <a href="https://www.confirmtkt.com" target="_blank">ConfirmTkt.com</a> · For educational use only</p>
+    <p>For official bookings visit <a href="https://www.irctc.co.in" target="_blank">IRCTC.co.in</a></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

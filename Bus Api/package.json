@@ -1,0 +1,19 @@
+{
+  "name": "abhibus-bus-scraper",
+  "version": "1.0.0",
+  "description": "AbhiBus Bus Scraper API — scrapes bus data between cities",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["abhibus", "bus", "scraper"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "puppeteer": "^24.40.0"
+  }
+}

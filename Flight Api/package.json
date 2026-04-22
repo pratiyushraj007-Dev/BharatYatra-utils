@@ -1,0 +1,20 @@
+{
+  "name": "cleartrip-flight-scraper",
+  "version": "1.0.0",
+  "description": "ClearTrip Flight Scraper API — scrapes one-way flight data",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node test.js"
+  },
+  "keywords": ["cleartrip", "flight", "scraper"],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "puppeteer": "^24.40.0"
+  }
+}
